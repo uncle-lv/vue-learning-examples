@@ -4,21 +4,25 @@
       <v-list subheader two-line>
         <v-list-item v-for="repo in list" :key="repo.name">
           <v-list-item-avatar>
-            <v-icon class="grey lighten-1" dark> mdi-folder </v-icon>
+            <v-avatar
+              ><img :src="repo.owner.avatar_url" alt="People"
+            /></v-avatar>
           </v-list-item-avatar>
 
           <v-list-item-content>
             <v-list-item-title v-text="repo.name"></v-list-item-title>
 
             <v-list-item-subtitle
-              v-text="repo.description"
+              v-text="repo.updated_at"
             ></v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
-            <v-btn icon>
-              <v-icon color="grey lighten-1">mdi-information</v-icon>
-            </v-btn>
+            <a :href="repo.html_url" target="_blank"
+              ><v-btn icon>
+                <v-icon color="grey lighten-1">mdi-information</v-icon>
+              </v-btn>
+            </a>
           </v-list-item-action>
         </v-list-item>
       </v-list>
@@ -51,7 +55,6 @@ export default {
       console.log(this.$axios);
       this.$axios.get(api.repo_list, params).then((response) => {
         this.list = response.data;
-        console.log(response.data);
       });
     },
   },
@@ -59,4 +62,7 @@ export default {
 </script>
 
 <style scoped rel="stylesheet/css">
+a {
+  text-decoration: none;
+}
 </style>
