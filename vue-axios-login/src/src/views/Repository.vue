@@ -55,6 +55,11 @@ export default {
       console.log(this.$axios);
       this.$axios.get(api.repo_list, params).then((response) => {
         this.list = response.data;
+
+        for (let i in this.list) {
+          let date = new Date(this.list[i].updated_at);
+          this.list[i].updated_at = date.toString();
+        }
       });
     },
   },
