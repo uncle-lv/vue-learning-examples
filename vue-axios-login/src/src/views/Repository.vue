@@ -18,7 +18,7 @@
           </v-list-item-content>
 
           <v-list-item-action>
-            <a :href="repo.html_url" target="_blank"
+            <a :href="repo.html_url" target="_blank" title="details"
               ><v-btn icon>
                 <v-icon color="grey lighten-1">mdi-information</v-icon>
               </v-btn>
@@ -55,10 +55,11 @@ export default {
       console.log(this.$axios);
       this.$axios.get(api.repo_list, params).then((response) => {
         this.list = response.data;
+        console.log(response.data);
 
         for (let i in this.list) {
           let date = new Date(this.list[i].updated_at);
-          this.list[i].updated_at = date.toString();
+          this.list[i].updated_at = date.toString().substring(0, 24);
         }
       });
     },
